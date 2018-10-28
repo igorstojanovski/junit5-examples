@@ -6,7 +6,7 @@ import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.TestPlan;
 
-public class BasicListner implements TestExecutionListener {
+public class BasicListener implements TestExecutionListener {
 
     public void testPlanExecutionStarted(TestPlan testPlan) {
         System.out.println("Test plan execution started.");
