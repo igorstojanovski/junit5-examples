@@ -1,8 +1,11 @@
 package org.igorski;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
 import org.igorski.extensions.AroundTestExecutionOne;
 import org.igorski.extensions.AroundTestExecutionTwo;
 import org.igorski.extensions.CompleteExtension;
+import org.igorski.extensions.WireMock;
+import org.igorski.extensions.WireMockExtension;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * Define @BeforeAll, @BeforeEach, @AfterEach, and @AfterAll to demonstrate all lifecycle phases of a test.
  *
  */
-@ExtendWith({AroundTestExecutionOne.class, AroundTestExecutionTwo.class})
+@ExtendWith({AroundTestExecutionOne.class, AroundTestExecutionTwo.class, WireMockExtension.class})
 public class SimpleMultipleExtensionTest {
 
     @BeforeAll
@@ -29,8 +32,8 @@ public class SimpleMultipleExtensionTest {
     }
 
     @Test
-    public void shouldRunTheTest() {
-        System.out.println("From inside the test.");
+    public void shouldRunTheTest(@WireMock WireMockServer server) {
+        System.out.println("Server is started on port: " + server.port());
     }
 
     @AfterEach
