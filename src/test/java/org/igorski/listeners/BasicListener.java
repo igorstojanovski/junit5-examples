@@ -5,35 +5,43 @@ import org.junit.platform.engine.reporting.ReportEntry;
 import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.TestPlan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BasicListener implements TestExecutionListener {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BasicListener.class);
+
+    public BasicListener() {
+        LOG.info("Simple.");
+    }
+
     public void testPlanExecutionStarted(TestPlan testPlan) {
-        System.out.println("Test plan execution started.");
+        LOG.info("Test plan execution started.");
     }
 
     public void testPlanExecutionFinished(TestPlan testPlan) {
-        System.out.println("Test plan execution finished.");
+        LOG.info("Test plan execution finished.");
     }
 
     public void dynamicTestRegistered(TestIdentifier testIdentifier) {
-        System.out.println("Dynamic test registered.");
+        LOG.info("Dynamic test registered.");
     }
 
     public void executionSkipped(TestIdentifier testIdentifier, String reason) {
-        System.out.println("Skipped execution because of " + reason);
+        LOG.info("Skipped execution because of " + reason);
     }
 
     public void executionStarted(TestIdentifier testIdentifier) {
-        System.out.println("Test execution STARTED of test: " + testIdentifier.getDisplayName());
+        LOG.info("Test execution STARTED of test: " + testIdentifier.getDisplayName());
     }
 
     public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
-        System.out.println("Test execution FINISHED of test: " + testIdentifier.getDisplayName());
+        LOG.info("Test execution FINISHED of test: " + testIdentifier.getDisplayName());
     }
 
     public void reportingEntryPublished(TestIdentifier testIdentifier, ReportEntry entry) {
-        System.out.println("Reporting entry published.");
+        LOG.info("Reporting entry published.");
     }
 
 }

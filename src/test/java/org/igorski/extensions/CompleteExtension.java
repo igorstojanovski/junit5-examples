@@ -8,38 +8,45 @@ import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CompleteExtension implements BeforeAllCallback, BeforeEachCallback,
         BeforeTestExecutionCallback, AfterTestExecutionCallback, AfterEachCallback,
         AfterAllCallback {
+    private static final Logger LOG = LoggerFactory.getLogger(CompleteExtension.class);
+
+    public CompleteExtension() {
+        LOG.info("Creating Complete extension instance.");
+    }
 
     @Override
     public void afterAll(ExtensionContext extensionContext) {
-        System.out.println("    After all the tests finish.");
+        LOG.info("    After all the tests finish.");
     }
 
     @Override
     public void afterEach(ExtensionContext extensionContext) {
-        System.out.println("    After each test.");
+        LOG.info("    After each test.");
     }
 
     @Override
     public void afterTestExecution(ExtensionContext extensionContext) {
-        System.out.println("    After test execution.");
+        LOG.info("    After test execution.");
     }
 
     @Override
     public void beforeAll(ExtensionContext extensionContext) {
-        System.out.println("    Before all tests start");
+        LOG.info("    Before all tests start");
     }
 
     @Override
     public void beforeEach(ExtensionContext extensionContext) {
-        System.out.println("    Before each test.");
+        LOG.info("    Before each test.");
     }
 
     @Override
     public void beforeTestExecution(ExtensionContext extensionContext) {
-        System.out.println("    Before test execution starts.");
+        LOG.info("    Before test execution starts.");
     }
 }

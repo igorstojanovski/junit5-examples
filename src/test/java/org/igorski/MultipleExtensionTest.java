@@ -13,6 +13,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -25,18 +27,20 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  *
  */
 @ExtendWith({AroundTestExecutionOne.class, AroundTestExecutionTwo.class, WireMockExtension.class})
-public class SimpleMultipleExtensionTest {
+public class MultipleExtensionTest {
+
+    private static final Logger LOG = LoggerFactory.getLogger(AroundTestExecutionOne.class);
 
     private final GenericHttpClient httpClient = new GenericHttpClient();
 
     @BeforeAll
     public static void beforeAll() {
-        System.out.println("@BeforeAll");
+        LOG.info("@BeforeAll");
     }
 
-    @BeforeEach
-    public void beforeEach() {
-        System.out.println("@BeforeEach");
+    @AfterAll
+    public static void afterAll() {
+        LOG.info("@AfterAll");
     }
 
     @Test
@@ -51,13 +55,13 @@ public class SimpleMultipleExtensionTest {
         assertThat(response).isEqualTo("Hello world!");
     }
 
-    @AfterEach
-    public void afterEach() {
-        System.out.println("@AfterEach");
+    @BeforeEach
+    public void beforeEach() {
+        LOG.info("@BeforeEach");
     }
 
-    @AfterAll
-    public static void afterAll() {
-        System.out.println("@AfterAll");
+    @AfterEach
+    public void afterEach() {
+        LOG.info("@AfterEach");
     }
 }

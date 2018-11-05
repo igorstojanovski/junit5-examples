@@ -1,5 +1,8 @@
 package org.igorski.client;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -8,9 +11,9 @@ import java.net.URL;
 import java.util.StringJoiner;
 
 public class GenericHttpClient {
-
+    private static final Logger LOG = LoggerFactory.getLogger(GenericHttpClient.class);
     public String sendGetRequest(String target) {
-        System.out.println("Requesting at: " + target);
+        LOG.info("Requesting at: " + target);
         StringJoiner joiner = new StringJoiner("\n");
 
         try {
